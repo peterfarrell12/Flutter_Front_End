@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "570337778397",
+    "firebase_url": "https://spendcentreapp.firebaseio.com",
+    "project_id": "spendcentreapp",
+    "storage_bucket": "spendcentreapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570337778397:android:b8a2bf854281e429699934",
+        "android_client_info": {
+          "package_name": "com.example.spend_analytics_project_fe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570337778397-12tp5g8taup5c3vnapkd4ohbs2bea1jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAYxDWwGgJ70oNh5RAxXBVFp38wcLoEJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570337778397-12tp5g8taup5c3vnapkd4ohbs2bea1jm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "570337778397-kqksnd9gu7vdpraf898s2pkak1i55hdc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.spendAnalyticsProjectFe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
