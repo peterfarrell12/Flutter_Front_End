@@ -29,6 +29,8 @@ dependencies:
   bloc: ^1.0.0
   flutter_bloc: any
   firebase: ^6.0.0
+  wave: ^0.0.8
+  flutter_spinkit: ^4.0.0
   
 
 dev_dependencies:
