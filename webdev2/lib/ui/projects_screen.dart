@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import '../widgets/new_project.dart';
 import '../widgets/project_list.dart';
 import 'package:webdev2/Models/project.dart';
+import 'project_sidebar.dart';
 
 class ProjectsScreen extends StatefulWidget {
+  Color mainColour;
+  Color titleColour;
+  String userName;
+
+  ProjectsScreen(this.mainColour, this.titleColour, this.userName);
   @override
   _ProjectsScreenState createState() => _ProjectsScreenState();
 }
@@ -111,67 +117,127 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Color(0xff0E0A15),
-        child: Column(
+        color: widget.mainColour,
+        child: Row(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.18,
-              width: double.infinity,
               decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Color(0xff999999))),
-                  color: Color(0xff1B1820)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text("Projects",
-                              style: TextStyle(
-                                  color: Color(0xff999999),
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Roboto")),
-                        ),
-                        IconButton(
-                            icon: Icon(Icons.add_circle_outline),
-                            iconSize: 50,
-                            color: Color(0xff999999),
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return NewProject(_addNewProject);
-                                  });
-                            })
-                      ]),
+                  color: widget.titleColour,
+                  borderRadius: new BorderRadius.horizontal(
+                    left: new Radius.circular(25.0),
+                  )),
+              width: MediaQuery.of(context).size.width * .7,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.18,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Color(0xff999999))),
+                          color: widget.titleColour),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Project List - CRH",
+                              style: TextStyle(color: widget.mainColour, fontSize: 35)
+                            )
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 5),
+                            //   child: Text("Welcome Back, " + widget.userName,
+                            //       style: TextStyle(
+                            //           color: widget.mainColour,
+                            //           fontSize: 10,
+                            //           fontFamily: "Roboto")),
+                            // ),
+                          ]),
+                    ),
+                    // Container(
+                    //   color: widget.titleColour,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: <Widget>[
+                    //         Text(
+                    //           "ID",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "TITLE",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "OWNER",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "DATE",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "IE",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "SC",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         ),
+                    //         Text(
+                    //           "DASHBOARD",
+                    //           style: TextStyle(color: Color(0xff716E74)),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ProjectList(_projects, _deleteProject),
+                    SizedBox(height: 10),
+                    FloatingActionButton(
+                      child: Icon(Icons.add),
+                      backgroundColor: widget.mainColour,
+                      elevation: 5,
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return NewProject(_addNewProject);
+                            });
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+                          child: Container(
+                            color: widget.titleColour,
+                                                      child: Container(
+                              decoration: BoxDecoration(
+                                                  color: Colors.white,
 
-                
-              
-              
-            ),
-                                  Container(
-                                    color: Color(0xff1B1820),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text("ID", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("TITLE", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("OWNER", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("DATE", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("IE", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("SC", style: TextStyle(color: Color(0xff716E74)),),
-                          Text("DASHBOARD", style: TextStyle(color: Color(0xff716E74)),)
-                        ],
-                      ),
-                                    ),
-                                  ),
-            SizedBox(
-              height: 20,
-            ),
-            ProjectList(_projects, _deleteProject)
+                  borderRadius: new BorderRadius.only(
+                    bottomLeft: new Radius.circular(25.0),
+                    topLeft: new Radius.circular(25.0),
+                  )),
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Sidebar(),
+                    ],
+                  )),
+                          ),
+            )
           ],
         ),
       ),

@@ -17,84 +17,67 @@ class ProjectList extends StatelessWidget {
         child: projects.isEmpty 
         ? Center(child: Text(
           "No Projects Added Yet",
-          style: TextStyle(color: Color(0xff999999)),
+          style: TextStyle(color: Colors.grey[200]),
         ),)
         : ListView.builder(
           itemCount: projects.length,
           itemBuilder: (ctx, index){
             return Container(
       padding: EdgeInsets.only(left: 10, right: 10),
-      child: Card(
-        margin: EdgeInsets.only(top: 5, bottom: 5),
-        color: Color(0xff15111C),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(
-              projects[index].id,
-              style: TextStyle(color: Color(0xff5A7591)),
-            ),
-                        Text(
-              projects[index].title,
-              style: TextStyle(color: Color(0xff908D92)),
-            ),
-                                    SizedBox(width: 5,),
-
-                        Text(
-              projects[index].user,
-              style: TextStyle(color: Color(0xff908D92)),
-            ),
-            Text(
-              DateFormat('yyyy-MM-dd').format(projects[index].date),
-              style: TextStyle(color: Color(0xff908D92))
-            ),
-
-                        IconButton(
-             icon: Icon(Icons.add_circle_outline, color: Color(0xff908D92)),)
-            ,
-                        IconButton(
-             icon: Icon(Icons.add_circle_outline, color: Color(0xff908D92)),)
-            ,
-                                    IconButton(
-             icon: Icon(Icons.play_arrow, color: Colors.greenAccent))
-
-          ],
-        ),
-      ),
+      color: Colors.grey[200],
       // child: Card(
-      //   elevation: 5,
-      //         child: ListTile(
-      //     trailing: Row(
-      //       mainAxisSize: MainAxisSize.min,
-      //       children: <Widget>[
-      //         IconButton(
-      //           icon: Icon(Icons.edit),
-      //           onPressed: () {
-      //           },
-      //           hoverColor: Colors.teal,
-      //         ),
-      //         IconButton(
-      //           icon: Icon(Icons.file_download),
-      //           onPressed: () {},
-      //           hoverColor: Colors.teal,
-      //         ),
-      //         IconButton(
-      //           icon: Icon(Icons.delete),
-      //           onPressed: () {
-      //             deletePj(projects[index].id);
-      //           },
-      //           hoverColor: Colors.teal,
-      //         )
-      //       ],
-      //     ),
-      //     title: Text(
-      //       '${projects[index].title}',
-      //     ),
-      //     subtitle: Text(
-      //       "Created On:  ${projects[index].date}  By ${projects[index].user}", style: TextStyle(),
-      //     ),
+      //   margin: EdgeInsets.only(top: 5, bottom: 5),
+      //   color: Colors.white,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: <Widget>[
+      //       Text(
+      //         projects[index].id,
+      //         style: TextStyle(color: Color(0xff5A7591)),
+      //       ),
+      //                   Text(
+      //         projects[index].title,
+      //         style: TextStyle(color: Color(0xff908D92)),
+      //       ),
+      //                               SizedBox(width: 5,),
+
+      //                   Text(
+      //         projects[index].user,
+      //         style: TextStyle(color: Color(0xff908D92)),
+      //       ),
+      //       Text(
+      //         DateFormat('yyyy-MM-dd').format(projects[index].date),
+      //         style: TextStyle(color: Color(0xff908D92))
+      //       ),
+
+      //                   IconButton(
+      //        icon: Icon(Icons.add_circle_outline, color: Color(0xff908D92)),)
+      //       ,
+      //                   IconButton(
+      //        icon: Icon(Icons.add_circle_outline, color: Color(0xff908D92)),)
+      //       ,
+      //                               IconButton(
+      //        icon: Icon(Icons.play_arrow, color: Colors.greenAccent))
+
+      //     ],
       //   ),
       // ),
+      child: Card(
+        elevation: 2,
+              child: ListTile(
+          trailing: Icon(
+              Icons.play_arrow, color: Colors.blue  ),
+          title: Text(
+            '${projects[index].title}',
+            style: TextStyle(
+              color: Colors.blue
+            ),
+          ),
+          subtitle: Text(
+            "Created On:  ${projects[index].date}  By ${projects[index].user}", style: TextStyle(),
+          ),
+        ),
+      ),
     );
           },
         )
