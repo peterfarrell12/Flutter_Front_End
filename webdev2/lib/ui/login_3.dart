@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
 
 class LoginScreen2 extends StatefulWidget {
   @override
@@ -10,10 +11,23 @@ class LoginScreen2 extends StatefulWidget {
 }
 
 class _LoginScreen2State extends State<LoginScreen2>  {
-  bool _createAccount = true;
+  bool _createAccount = false;
   final _formKey = GlobalKey<FormState>();
   String _email, _password, _name;
+  bool _companyReg = true;
+  String _selectedCompany;
+  TextEditingController pinController = TextEditingController();
+  String thisText = "";
+  int pinLength = 4;
+  bool hasError = false;
+  String errorMessage;
 
+
+  List<String> companyList = <String>['CRH Ireland', 'Irish Cement', 'Roadstone'];
+
+
+
+    
   @override
   Widget build(BuildContext context) {
     final _auth = BlocProvider.of<AuthBloc>(context);
@@ -132,8 +146,96 @@ class _LoginScreen2State extends State<LoginScreen2>  {
                               ),
                             ),
                             Divider(
+                              height: 5),
+                              Visibility(
+                              visible: _createAccount,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SwitchListTile(
+                              title: const Text('Company Already Registered?'),
+                              value: _companyReg,
+                              onChanged: (bool val) =>
+                                  setState(() => _companyReg = val)),
+                              ),
+                            ),
+                            Divider(height: 5,),
+                            _companyReg ? 
+                            Visibility(
+                              visible: _createAccount,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: <Widget>[
+                                FormField(
+                    builder: (FormFieldState state) {
+                      return InputDecorator(
+                        decoration: InputDecoration(
+                          labelText: 'Company Name',
+                        ),
+                        isEmpty: _selectedCompany == '',
+                        child: new DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                                value: _selectedCompany,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedCompany = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: companyList.map((String value) {
+                                  return new DropdownMenuItem(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                           
+                    PinCodeTextField(
+                isCupertino: true,
+                autofocus: false,
+                controller: pinController,
+                hideCharacter: true,
+                highlight: true,
+                highlightColor: Colors.blue,
+                defaultBorderColor: Colors.blue,
+                hasTextBorderColor: Colors.grey,
+                maxLength: pinLength,
+                hasError: hasError,
+                maskCharacter: "*",
+
+
+                pinCodeTextFieldLayoutType: PinCodeTextFieldLayoutType.AUTO_ADJUST_WIDTH,
+                wrapAlignment: WrapAlignment.start,
+                pinBoxDecoration: ProvidedPinBoxDecoration.underlinedPinBoxDecoration,
+                pinTextStyle: TextStyle(fontSize: 30.0),
+                pinTextAnimatedSwitcherTransition: ProvidedPinBoxTextAnimation.scalingTransition,
+                pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
+
+                                onTextChanged: (text) {
+                  setState(() {
+                    hasError = false;
+                  });
+                },
+                onDone: (text){
+                  print("DONE $text");
+                },
+            )])  
+                            ),
+                            ) :
+                            
+                            
+
+
+
+                            Divider(
                               height: 10,
                             ),
+                            
                             if (_createAccount) ...[
                               RaisedButton(
                                 color: Colors.blue,
