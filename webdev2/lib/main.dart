@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webdev2/plugins/desktop.dart';
-
+import 'package:firebase/firebase.dart';
+import 'package:firebase/firestore.dart' as fs;
+import 'widgets/project_list_view.dart';
 import 'ui/auth.dart';
-void main() {
+void main()   {
+  
   WidgetsFlutterBinding.ensureInitialized();
   setTargetPlatformForDesktop();
   runApp(MyApp());
@@ -31,6 +34,8 @@ class _MyAppState extends State<MyApp> {
   
   AuthBloc _auth;
   StreamSubscription<AuthUser> _userChanged;
+  fs.Firestore store = firestore();
+
 
   @override
   void dispose() {
@@ -61,7 +66,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthBloc>(builder: (_) => _auth),
       ],
       child: MaterialApp(
-        home: AuthCheck(),
+        home: AuthCheck()
+        //ProjectList()
       ),
     );
   }

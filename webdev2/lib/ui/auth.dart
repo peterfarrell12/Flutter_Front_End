@@ -2,7 +2,7 @@ import 'package:fb_auth/fb_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webdev2/ui/home_screen.dart';
-import 'package:webdev2/ui/login_3.dart';
+import 'package:webdev2/ui/login_screen.dart';
 
 class AuthCheck extends StatelessWidget {
   const AuthCheck({
