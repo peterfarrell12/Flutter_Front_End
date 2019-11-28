@@ -32,6 +32,8 @@ dependencies:
   wave: ^0.0.8
   flutter_spinkit: ^4.0.0
   pin_code_text_field: ^1.4.0
+  percent_indicator: ^2.1.1+1
+
   
 
 dev_dependencies:

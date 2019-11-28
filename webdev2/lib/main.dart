@@ -9,6 +9,7 @@ import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart' as fs;
 import 'widgets/project_list_view.dart';
 import 'ui/auth.dart';
+import 'ui/company_check.dart';
 void main()   {
   
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +67,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthBloc>(builder: (_) => _auth),
       ],
       child: MaterialApp(
-        home: AuthCheck()
+        home: 
+        AuthCheck()
         //ProjectList()
       ),
     );

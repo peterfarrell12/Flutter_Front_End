@@ -59,86 +59,86 @@
 // //   _CompLoginState createState() => _CompLoginState();
 // // }
 
-// // class _CompLoginState extends State<CompLogin> {
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return widget.login ?
-// //   AlertDialog(
-// //     content:  Column(children: <Widget>[
-// //       StreamBuilder<fs.QuerySnapshot>(
-// //           stream: companyRef
-// //               .get()
-// //               .asStream(),
-// //           builder: (BuildContext
-// //                   context,
-// //               AsyncSnapshot<
-// //                       fs.QuerySnapshot>
-// //                   snapshot) {
-// //             if (snapshot.hasError)
-// //               return new Text(
-// //                   'Error: ${snapshot.error}');
-// //             switch (snapshot
-// //                 .connectionState) {
-// //               case ConnectionState
-// //                   .waiting:
-// //                 return new Text(
-// //                     'Loading...');
-// //               default:
-// //                 return FormField(
-// //                   builder:
-// //                       (FormFieldState
-// //                           state) {
-// //                     return InputDecorator(
-// //                       decoration:
-// //                           InputDecoration(
-// //                         labelText:
-// //                             'Company Name',
-// //                       ),
-// //                       isEmpty:
-// //                           _selectedCompany  ==
-// //                               '',
-// //                       child:
-// //                           new DropdownButtonHideUnderline(
-// //                         child:
-// //                             DropdownButton(
-// //                           value:
-// //                               _selectedCompany,
-// //                           isDense:
-// //                               true,
-// //                           onChanged:
-// //                               (dynamic
-// //                                   newValue) {
-// //                             setState(
-// //                                 () {
-// //                               _selectedCompany = newValue;                                                                            
-// //                               state.didChange(
-// //                                   newValue);
-// //                             });
-// //                           },
-// //                           items: snapshot
-// //                               .data
-// //                               .docs
-// //                               .map((fs.DocumentSnapshot
-// //                                   document) {
-// //                             return new DropdownMenuItem(
-// //                               value: document
-// //                                   .data()['Company Name'],
-// //                               child: new Text(
-// //                                   document.data()['Company Name']),
-// //                             );
-// //                           }).toList(),
-// //                         ),
-// //                       ),
-// //                     );
-// //                   },
-// //                 );
-// //             }
-// //           }),
-// //      SizedBox(height: 10,),
-// //       FlatButton(child: Text("Check Credentials"),onPressed: () {
+// class _CompLoginState extends State<CompLogin> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return widget.login ?
+//   AlertDialog(
+//     content:  Column(children: <Widget>[
+//       StreamBuilder<fs.QuerySnapshot>(
+//           stream: companyRef
+//               .get()
+//               .asStream(),
+//           builder: (BuildContext
+//                   context,
+//               AsyncSnapshot<
+//                       fs.QuerySnapshot>
+//                   snapshot) {
+//             if (snapshot.hasError)
+//               return new Text(
+//                   'Error: ${snapshot.error}');
+//             switch (snapshot
+//                 .connectionState) {
+//               case ConnectionState
+//                   .waiting:
+//                 return new Text(
+//                     'Loading...');
+//               default:
+//                 return FormField(
+//                   builder:
+//                       (FormFieldState
+//                           state) {
+//                     return InputDecorator(
+//                       decoration:
+//                           InputDecoration(
+//                         labelText:
+//                             'Company Name',
+//                       ),
+//                       isEmpty:
+//                           _selectedCompany  ==
+//                               '',
+//                       child:
+//                           new DropdownButtonHideUnderline(
+//                         child:
+//                             DropdownButton(
+//                           value:
+//                               _selectedCompany,
+//                           isDense:
+//                               true,
+//                           onChanged:
+//                               (dynamic
+//                                   newValue) {
+//                             setState(
+//                                 () {
+//                               _selectedCompany = newValue;                                                                            
+//                               state.didChange(
+//                                   newValue);
+//                             });
+//                           },
+//                           items: snapshot
+//                               .data
+//                               .docs
+//                               .map((fs.DocumentSnapshot
+//                                   document) {
+//                             return new DropdownMenuItem(
+//                               value: document
+//                                   .data()['Company Name'],
+//                               child: new Text(
+//                                   document.data()['Company Name']),
+//                             );
+//                           }).toList(),
+//                         ),
+//                       ),
+//                     );
+//                   },
+//                 );
+//             }
+//           }),
+//      SizedBox(height: 10,),
+//       FlatButton(child: Text("Check Credentials"),onPressed: () {
        
        
-// //       }),                                                  
+//       }),                                                  
       
 // //     ]),
 // //   )

@@ -5,14 +5,16 @@ import '../widgets/new_project.dart';
 import 'package:webdev2/Models/project.dart';
 import 'project_sidebar.dart';
 import 'package:webdev2/widgets/project_list_view.dart';
+import 'package:webdev2/ui/company_check.dart';
 
 class ProjectsScreen extends StatefulWidget {
   Color mainColour;
   Color titleColour;
   String userName;
+  String company;
   bool isFiltered;
 
-  ProjectsScreen(this.mainColour, this.titleColour, this.userName);
+  ProjectsScreen(this.mainColour, this.titleColour, this.userName, this.company);
   @override
   _ProjectsScreenState createState() => _ProjectsScreenState();
 }
@@ -76,7 +78,9 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                 onPressed: () {
                                   showDialog(
                                     context: context,
-                                    child: NewProject(_user.displayName, "CRH plc"),
+                                    child:  
+                                    
+                                    NewProject(_user.displayName, "CRH plc"),
                                   );
                                   
                                 },

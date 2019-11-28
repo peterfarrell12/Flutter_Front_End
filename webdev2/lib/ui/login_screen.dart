@@ -7,6 +7,8 @@ import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart' as fs;
 import 'package:webdev2/widgets/project_list_view.dart';
+import 'package:webdev2/Dead/firestore_funcs.dart';
+import 'package:webdev2/ui/company_check.dart';
 
 class LoginScreen2 extends StatefulWidget {
   @override
@@ -14,19 +16,14 @@ class LoginScreen2 extends StatefulWidget {
 }
 
 class _LoginScreen2State extends State<LoginScreen2> {
-
   //Variables
   bool _autovalidation = false;
   bool _createAccount = false;
   final _formKey = GlobalKey<FormState>();
-  String _email, _password, _name;
+  String _email, _password, _name, _cName, _selectedCompany;
 
 
-  //Firestore 
-  // static fs.Firestore store = firestore();
-  // fs.CollectionReference companyRef = store.collection("companies");
   // var userRef = store.collection('users');
-
 
   @override
   void initState() {
@@ -64,7 +61,8 @@ class _LoginScreen2State extends State<LoginScreen2> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                if (_createAccount) ...[ //Checks if user has selected login/signup
+                                if (_createAccount) ...[
+                                  //Checks if user has selected login/signup
                                   Text(
                                     'Sign Up',
                                     style: TextStyle(
@@ -85,7 +83,8 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                   height: 20,
                                 ),
                                 //Sign Up
-                                Visibility( //If Sign Up -> Display Name Box Shows Up
+                                Visibility(
+                                  //If Sign Up -> Display Name Box Shows Up
                                   visible: _createAccount,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -97,17 +96,47 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                       decoration: InputDecoration(
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Colors.grey,
-                                                width: 1.0),
+                                                color: Colors.grey, width: 1.0),
                                           ),
                                           enabledBorder:
                                               const OutlineInputBorder(
-                                                  borderSide:
-                                                      const BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1.0)),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.grey,
+                                                      width: 1.0)),
                                           labelText: "Display Name"),
                                       onSaved: (val) => _name = val,
+                                      // validator: (val) => val.isEmpty
+                                      //     ? 'Name Required'
+                                      //     : null,
+                                      //validator: email,
+                                    ),
+                                  ),
+                                ),
+                                Divider(
+                                  height: 5,
+                                ),
+                                Visibility(
+                                  //If Sign Up -> Display Name Box Shows Up
+                                  visible: _createAccount,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    //Display Name
+                                    child: TextFormField(
+                                      style:
+                                          TextStyle(color: Color(0xff716E74)),
+                                      textAlign: TextAlign.center,
+                                      decoration: InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.grey, width: 1.0),
+                                          ),
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.grey,
+                                                      width: 1.0)),
+                                          labelText: "Company Name"),
+                                      onSaved: (val) => _cName = val,
                                       // validator: (val) => val.isEmpty
                                       //     ? 'Name Required'
                                       //     : null,
@@ -122,16 +151,14 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                   padding: const EdgeInsets.all(8.0),
                                   //Email Address
                                   child: TextFormField(
-                                    style:
-                                        TextStyle(color: Color(0xff716E74)),
+                                    style: TextStyle(color: Color(0xff716E74)),
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               color: Colors.grey, width: 1.0),
                                         ),
-                                        enabledBorder:
-                                            const OutlineInputBorder(
+                                        enabledBorder: const OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.grey, width: 1.0),
                                         ),
@@ -144,11 +171,12 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                 Divider(
                                   height: 5,
                                 ),
+
+
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: TextFormField(
-                                    style:
-                                        TextStyle(color: Color(0xff716E74)),
+                                    style: TextStyle(color: Color(0xff716E74)),
                                     obscureText: true,
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
@@ -156,11 +184,10 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                           borderSide: BorderSide(
                                               color: Colors.grey, width: 1.0),
                                         ),
-                                        enabledBorder:
-                                            const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 1.0)),
+                                        enabledBorder: const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.grey,
+                                                width: 1.0)),
                                         labelText: "Password"),
                                     validator: (val) => val.isEmpty
                                         ? 'Password Required'
@@ -168,53 +195,51 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                     onSaved: (val) => _password = val,
                                   ),
                                 ),
-                                   Divider(
+                                Divider(
                                   height: 5,
                                 ),
-                                
+                                                                
+
                                 Divider(
                                   height: 10,
                                 ),
 
                                 if (_createAccount) ...[
                                   RaisedButton(
-                                    color: Colors.blue,
-                                    child: Text(
-                                      'Sign Up',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    onPressed: () {
-                                      
-                                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
-                        _auth.add(CreateAccount(_email, _password,
-                          displayName: _name));
-                      }
-                                      // if (_companyReg) {
-                                        
-                                      // } else {
-                                      //   // Map<String, dynamic> newCompany = {
-                                      //   //   "Company Name": _companyName,
-                                      //   //   "Company Code": _companyPin
-                                      //   // };
-                                      //   // companyRef.add(newCompany);
-                                      // }
-                                    }
-                                    
-                                  )
+                                      color: Colors.blue,
+                                      child: Text(
+                                        'Sign Up',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      onPressed: () {
+
+                                        if (_formKey.currentState.validate()) {
+                                          _formKey.currentState.save();
+                                          
+
+
+                                          createUser(_name, _email, _cName);
+
+                                          _auth.add(CreateAccount(
+                                              _email, _password,
+                                              displayName: _name));
+                                        }
+                                      })
                                 ] else ...[
                                   RaisedButton(
+
                                     color: Colors.blue,
                                     child: Text('Login',
-                                        style:
-                                            TextStyle(color: Colors.white)),
+                                        style: TextStyle(color: Colors.white)),
                                     onPressed: () {
+
                                       if (_formKey.currentState.validate()) {
                                         _formKey.currentState.save();
-                                        _auth.add(
-                                            LoginEvent(_email, _password));
+                                        _auth
+                                 .add(LoginEvent(_email, _password));
+
                                       }
-                                    },
+                                     },
                                   ),
                                 ],
                                 FlatButton(
@@ -231,11 +256,6 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                 ),
                                 if (state is AuthLoadingState) ...[
                                   CircularProgressIndicator()
-                                  //                       SpinKitFadingCube(
-                                  // color: Colors.red,
-                                  // size: 50.0,
-                                  // controller: AnimationController(vsync: this, duration: const Duration(milliseconds: 1200)),
-                                  // )],
                                 ],
                               ]),
                         ),

@@ -6,6 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart' as fs;
 import 'package:intl/intl.dart';
+import 'package:webdev2/Dead/firestore_funcs.dart';
+
+
+
     fs.Firestore store = firestore();
     fs.CollectionReference companyRef = store.collection("companies").doc("CRH plc").collection("projects");
     fs.CollectionReference projectRef = store.collection('projects');
@@ -29,6 +33,11 @@ class _ProjectListState extends State<ProjectList> {
 
   //   return qn.docs;
   // }
+
+    @override
+  void initState() {
+    super.initState();
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +68,7 @@ class _ProjectListState extends State<ProjectList> {
                                 projectUser: document.data()["User"],
                                 projectDate: document.data()['Date'],
                                 projectColour: Colors.green[900],
+                                projectID: document.id,
                               );
                           }).toList(),
                         );
@@ -72,13 +82,14 @@ class _ProjectListState extends State<ProjectList> {
 
       
 class CustomCard extends StatelessWidget {
-  CustomCard({@required this.projectTitle, this.projectUser, this.projectDate, this.projectColour});
+  CustomCard({@required this.projectTitle, this.projectUser, this.projectDate, this.projectColour, this.projectID});
 
   final projectTitle;
   final projectUser;
   final projectDate;
   final projectColour;
   final f = new DateFormat('dd-MMM-yy');
+  final projectID;
   
 
 
@@ -101,7 +112,25 @@ class CustomCard extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    IconButton(icon: Icon(Icons.delete_sweep), onPressed: (){},),
+                    IconButton(icon: Icon(Icons.delete_sweep), onPressed: (){
+                      showDialog(
+                        context: context,
+                        child: AlertDialog(
+                          title: Text("Delete Project?"),
+                          content: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                              hoverColor: Colors.blue,
+                              child: Text("Delete"),
+                              onPressed: () {
+                                deleteProject("CRH plc", projectID);
+                                Navigator.pop(context);
+                              })
+                           
+                          ),
+                        )
+                      );
+                    },),
                                     SizedBox(width: 30,),
 
                     CircleAvatar(backgroundColor: Colors.green,),
@@ -142,27 +171,6 @@ class CustomCard extends StatelessWidget {
               ],
             ),
           )
-              // ListTile(
-
-              //   leading: Row(children: <Widget>[ 
-              //     IconButton(icon: Icon(Icons.more), onPressed: (){},),
-              //     CircleAvatar(backgroundColor: Colors.green,)
-              //   ],),
-              //   title: Text(projectTitle, style: TextStyle(color: Colors.black),),
-              //   subtitle: Text(projectUser.toString()),
-              //   trailing: Row(
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     children: <Widget>[
-              //     Text(projectDate.toString()),
-              //     SizedBox(width: 5,),
-              //     Row(
-              //       children: <Widget>[
-                    
-              //       Icon(Icons.show_chart),
-              //       Text("Visualize")
-              //     ],)
-              //   ],),
-              // );
         ),
       ),
     );

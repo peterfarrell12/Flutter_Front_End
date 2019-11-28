@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webdev2/ui/home_screen.dart';
 import 'package:webdev2/ui/login_screen.dart';
+import 'package:webdev2/ui/company_check.dart';
+import 'company_screen.dart';
 
 class AuthCheck extends StatelessWidget {
   const AuthCheck({
@@ -14,7 +16,8 @@ class AuthCheck extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is LoggedInState) {
-          return HomeScreen();
+          return 
+          CompanyScreen();
         }
         return LoginScreen2();
       },

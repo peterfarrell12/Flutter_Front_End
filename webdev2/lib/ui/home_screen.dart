@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final _user = AuthBloc.currentUser(context);
 
     return Material(
+      
       child: Row(children: <Widget>[
         Column(
           children: <Widget>[
@@ -162,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: NeverScrollableScrollPhysics(),
               controller: pageController,
               children: <Widget>[
-                ProjectsScreen(_mainColour, _textColour, _user.displayName),
+                ProjectsScreen(_mainColour, _textColour, _user.displayName, "h"),
                 DashboardScreen(),
                 SettingsScreen(),
               ],
