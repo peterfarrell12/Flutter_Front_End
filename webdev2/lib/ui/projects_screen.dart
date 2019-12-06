@@ -1,11 +1,8 @@
 import 'package:fb_auth/data/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import '../widgets/new_project.dart';
-//import '../widgets/project_list.dart';
-import 'package:webdev2/Models/project.dart';
 import 'project_sidebar.dart';
 import 'package:webdev2/widgets/project_list_view.dart';
-import 'package:webdev2/ui/company_check.dart';
 
 class ProjectsScreen extends StatefulWidget {
   Color mainColour;
@@ -80,7 +77,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                     context: context,
                                     child:  
                                     
-                                    NewProject(_user.displayName, "CRH plc"),
+                                    NewProject(_user.displayName, widget.company),
                                   );
                                   
                                 },
@@ -168,7 +165,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                               ),
                             ),
                     Expanded(child: 
-                    Container(child: ProjectList(widget.isFiltered),),)
+                    Container(child: ProjectList(widget.isFiltered, widget.company),),)
                   ],
                 ),
 

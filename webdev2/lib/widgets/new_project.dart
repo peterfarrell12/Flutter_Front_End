@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../Models/project.dart';
 import 'package:webdev2/Dead/firestore_funcs.dart';
 
 class NewProject extends StatefulWidget {

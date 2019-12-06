@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:fb_auth/fb_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webdev2/plugins/desktop.dart';
 import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart' as fs;
-import 'widgets/project_list_view.dart';
-import 'ui/auth.dart';
-import 'ui/company_check.dart';
+import 'ui/Auth/auth.dart';
+import 'dart:io';
+
 void main()   {
   
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,8 +67,9 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         home: 
-        AuthCheck()
+        AuthCheck(),
         //ProjectList()
+        //HomeScreen(),
       ),
     );
   }

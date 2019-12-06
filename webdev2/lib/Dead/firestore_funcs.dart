@@ -49,6 +49,28 @@ void createCompany(String companyName, String companyPIN, String companyABB)asyn
     return pin;
   }
 
+  Future<String> getCompanyName (String userEmail) async {
+    String comp;
+    List<String> companies = [];
+
+    await store.collection('companies').get().then((val){
+        val.forEach((company){
+          companies.add(company.data()['Company Name']); 
+        });
+        for (var i = 0; i < companies.length; i++) {
+          store.collection('companies').doc(companies[i]).collection('users').get().then((val) {
+            val.forEach((user){
+              if(user.data()['Email']) {
+                comp = user.data()['Company'];
+              }
+            });
+          });
+        }
+    });
+
+    return comp;
+  }
+
 
   Future<bool> doesNameAlreadyExist(String name, String pin) async {
   final fs.DocumentSnapshot result = await store

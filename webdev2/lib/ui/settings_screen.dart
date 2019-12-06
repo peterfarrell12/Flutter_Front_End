@@ -12,7 +12,7 @@ class SettingsScreen extends StatelessWidget {
           color: Colors.amberAccent,
         ),
                   Expanded(
-                                      child: Container(child: ProjectList(true),
+                                      child: Container(child: ProjectList(true, "h"),
           
         ),
                   ),

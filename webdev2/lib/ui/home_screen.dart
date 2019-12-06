@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:webdev2/ui/dashboard_screen.dart';
+import 'package:webdev2/ui/Dashboard/dashboard_screen.dart';
 import 'package:webdev2/ui/projects_screen.dart';
 import 'package:webdev2/ui/settings_screen.dart';
 import 'package:fb_auth/fb_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'project_sidebar.dart';
-import 'package:firebase/firebase.dart' as fb;
-import 'package:firebase/firestore.dart' as fs;
-import 'package:webdev2/widgets/project_list_view.dart';
+import 'package:webdev2/Dead/firestore_funcs.dart';
 
 class HomeScreen extends StatefulWidget {
+
+
+  HomeScreen();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -30,10 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Color _menuIconSelected = Colors.blue[900];
 
   @override
+    void initState() {
+      // TODO: implement initState
+      
+    }
+
+  @override
   Widget build(BuildContext context) {
     final _user = AuthBloc.currentUser(context);
+    final _company =   getCompanyName(_user.email.toString());
 
-    return Material(
+ 
+
+    return BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) => Material(
       
       child: Row(children: <Widget>[
         Column(
@@ -53,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               CircleAvatar( //Avatar
                                 
                                 backgroundColor: _textColour,
-                                child: Text("CRH", style: TextStyle(color: _mainColour),),
+                                child: Text(_company.toString(), style: TextStyle(color: _mainColour),),
                                 radius: MediaQuery.of(context).size.width * .02,
                               ),
                               SizedBox(
@@ -171,6 +181,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ]),
-    );
+    ));
   }
 }

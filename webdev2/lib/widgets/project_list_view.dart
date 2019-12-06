@@ -1,6 +1,5 @@
 import 'package:fb_auth/data/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import '../Models/project.dart';
 import '../ui/projects_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase/firebase.dart';
@@ -18,8 +17,9 @@ import 'package:webdev2/Dead/firestore_funcs.dart';
 class ProjectList extends StatefulWidget {
 
   bool fil;
+  final String company;
 
-  ProjectList(this.fil);
+  ProjectList(this.fil, this.company);
 
 
   @override
@@ -49,7 +49,7 @@ class _ProjectListState extends State<ProjectList> {
     return Center(
         child: Container(
           child: StreamBuilder<fs.QuerySnapshot>(
-                stream: !widget.fil ? companyRef.where("Company", "==", _company)
+                stream: !widget.fil ? companyRef.where("Company", "==", widget.company)
                   .get().asStream() : companyRef.where("User", "==", _user.displayName)
                   .get().asStream(),
                 builder: (BuildContext context,
